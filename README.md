@@ -59,6 +59,19 @@ npm run build
 npm run preview
 ```
 
+## Deploy to Vercel
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Surya-1301/Azal-International)
+
+Or manually:
+
+1. Push your code to GitHub
+2. Go to [Vercel](https://vercel.com)
+3. Import your repository
+4. Vercel will auto-detect Vite and deploy
+
+The project is pre-configured with `vercel.json` for proper SPA routing.
+
 ## Features
 
 - 🎨 Luxury brand-inspired design system
