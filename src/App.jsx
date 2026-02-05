@@ -4,6 +4,8 @@ import MainLayout from './layouts/MainLayout.jsx'
 import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
 import Collections from './pages/Collections.jsx'
+import Projects from './pages/Projects.jsx'
+import Sectors from './pages/Sectors.jsx'
 import Contact from './pages/Contact.jsx'
 import NotFound from './pages/NotFound.jsx'
 
@@ -14,6 +16,8 @@ function App() {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
           <Route path="collections" element={<Collections />} />
+          <Route path="projects" element={<Projects />} />
+          <Route path="sectors" element={<Sectors />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />

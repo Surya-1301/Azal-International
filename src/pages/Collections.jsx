@@ -23,17 +23,7 @@ const collections = [
     tags: ['Contemporary', 'Minimal', 'Custom'],
     image: 'https://images.unsplash.com/photo-1594122230689-45899d9e6f69?w=500&h=400&fit=crop'
   },
-  {
-    id: 3,
-    title: 'Artisan Studio',
-    category: 'Handcrafted',
-    description: 'Hand-crafted statement pieces designed in collaboration with global designers.',
-    size: '10x14 ft',
-    material: 'Hand-Knotted Wool',
-    price: 'From $5,800',
-    tags: ['Handcrafted', 'Luxury', 'Designer'],
-    image: 'https://images.unsplash.com/photo-1580058572462-993fcf830278?w=500&h=400&fit=crop'
-  },
+
   {
     id: 4,
     title: 'Urban Edge',
@@ -103,10 +93,16 @@ const collections = [
 ]
 
 const categories = ['All', 'Traditional', 'Contemporary', 'Handcrafted']
+const materials = ['All', ...new Set(collections.map((item) => item.material))]
+const sizes = ['All', ...new Set(collections.map((item) => item.size))]
+const tags = ['All', ...new Set(collections.flatMap((item) => item.tags))]
 
 function Collections() {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
+  const [selectedMaterial, setSelectedMaterial] = useState('All')
+  const [selectedSize, setSelectedSize] = useState('All')
+  const [selectedTag, setSelectedTag] = useState('All')
 
   const filteredCollections = collections.filter((item) => {
     const matchesSearch = 
@@ -117,7 +113,16 @@ function Collections() {
     const matchesCategory = 
       selectedCategory === 'All' || item.category === selectedCategory
 
-    return matchesSearch && matchesCategory
+    const matchesMaterial =
+      selectedMaterial === 'All' || item.material === selectedMaterial
+
+    const matchesSize =
+      selectedSize === 'All' || item.size === selectedSize
+
+    const matchesTag =
+      selectedTag === 'All' || item.tags.includes(selectedTag)
+
+    return matchesSearch && matchesCategory && matchesMaterial && matchesSize && matchesTag
   })
 
   return (
@@ -169,6 +174,42 @@ function Collections() {
                 </svg>
               </button>
             )}
+          </div>
+
+          <div className="collections__selects">
+            <label className="select-field">
+              <span>Material</span>
+              <select
+                value={selectedMaterial}
+                onChange={(e) => setSelectedMaterial(e.target.value)}
+              >
+                {materials.map((material) => (
+                  <option key={material} value={material}>
+                    {material}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="select-field">
+              <span>Size</span>
+              <select value={selectedSize} onChange={(e) => setSelectedSize(e.target.value)}>
+                {sizes.map((size) => (
+                  <option key={size} value={size}>
+                    {size}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="select-field">
+              <span>Tag</span>
+              <select value={selectedTag} onChange={(e) => setSelectedTag(e.target.value)}>
+                {tags.map((tag) => (
+                  <option key={tag} value={tag}>
+                    {tag}
+                  </option>
+                ))}
+              </select>
+            </label>
           </div>
 
           <div className="filter-chips">
@@ -256,6 +297,9 @@ function Collections() {
               onClick={() => {
                 setSearchQuery('')
                 setSelectedCategory('All')
+                setSelectedMaterial('All')
+                setSelectedSize('All')
+                setSelectedTag('All')
               }}
             >
               Clear Filters

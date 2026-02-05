@@ -1,18 +1,27 @@
+import heroPrimary from '../assets/hero-primary.svg'
+import heroSecondary from '../assets/hero-secondary.svg'
+import heritageImage from '../assets/collection-heritage.svg'
+import modernImage from '../assets/collection-modern.svg'
+import artisanImage from '../assets/collection-artisan.svg'
+
 const collectionCards = [
   {
     title: 'Heritage Weaves',
     description:
       'Classic motifs with contemporary palettes for boutique hotels and premium residences.',
+    image: heritageImage,
   },
   {
     title: 'Modern Luxe',
     description:
       'Minimal textures, tonal gradients, and bespoke sizes tailored to modern spaces.',
+    image: modernImage,
   },
   {
     title: 'Artisan Studio',
     description:
       'Hand-crafted statement pieces designed in collaboration with global designers.',
+    image: artisanImage,
   },
 ]
 
@@ -82,8 +91,16 @@ function Home() {
             </div>
           </div>
           <div className="hero__visual">
-            <div className="hero__panel hero__panel--primary" />
-            <div className="hero__panel hero__panel--secondary" />
+            <img
+              className="hero__panel hero__panel--primary"
+              src={heroPrimary}
+              alt="Luxury carpet moodboard"
+            />
+            <img
+              className="hero__panel hero__panel--secondary"
+              src={heroSecondary}
+              alt="Material and texture samples"
+            />
           </div>
         </div>
       </section>
@@ -116,7 +133,9 @@ function Home() {
           <div className="grid grid--three">
             {collectionCards.map((card) => (
               <article key={card.title} className="card">
-                <div className="card__icon" />
+                <div className="card__icon">
+                  <img src={card.image} alt={card.title} />
+                </div>
                 <h3>{card.title}</h3>
                 <p>{card.description}</p>
                 <button className="text-button" type="button">
